@@ -1,6 +1,8 @@
 import { Produto } from './produto.model';
+import { ProdutosService } from "./produtos.service";
 export declare class ProdutosController {
-    produtos: Produto[];
+    private service;
+    constructor(service: ProdutosService);
     obterTodos(): Produto[];
     obterUmProduto(params: any): Produto;
     criar(produto: Produto): void;

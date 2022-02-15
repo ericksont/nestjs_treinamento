@@ -15,29 +15,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProdutosController = void 0;
 const common_1 = require("@nestjs/common");
 const produto_model_1 = require("./produto.model");
+const produtos_service_1 = require("./produtos.service");
 let ProdutosController = class ProdutosController {
-    constructor() {
-        this.produtos = [
-            new produto_model_1.Produto('LIV01', 'Livro de TDD', 29.90),
-            new produto_model_1.Produto('LIV02', 'Iniciando com flutter', 30.90),
-            new produto_model_1.Produto('LIV03', 'Inteligencia artificial', 5.50)
-        ];
+    constructor(service) {
+        this.service = service;
     }
     obterTodos() {
-        return this.produtos;
+        return this.service.obterTodos();
     }
     obterUmProduto(params) {
-        return this.produtos[params.id];
+        return this.service.obterUm(params.id);
     }
     criar(produto) {
-        produto.id = 4;
-        this.produtos.push(produto);
+        this.service.criar(produto);
     }
     alterar(produto) {
-        return produto;
+        return this.service.alterar(produto);
     }
     apagar(params) {
-        this.produtos.pop();
+        this.service.apagar(params.id);
     }
 };
 __decorate([
@@ -75,7 +71,8 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProdutosController.prototype, "apagar", null);
 ProdutosController = __decorate([
-    (0, common_1.Controller)('produtos')
+    (0, common_1.Controller)('produtos'),
+    __metadata("design:paramtypes", [produtos_service_1.ProdutosService])
 ], ProdutosController);
 exports.ProdutosController = ProdutosController;
 //# sourceMappingURL=produtos.controller.js.map
